@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Department;
 use App\Models\Employee;
+use App\Models\Position;
+use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
@@ -13,6 +15,7 @@ class EmployeeController extends Controller
     public function index()
     {
         $employees = Employee::latest()->paginate(5);
+
         return view('employees.index', compact('employees'));
     }
 
@@ -21,8 +24,10 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        $employees = Employee::latest()->paginate(5);
-        return view('employees.create', compact('employees'));
+        $departments = Department::all();
+        $positions = Position::all();
+
+        return view('employees.create', compact('departments', 'positions'));
     }
 
     /**
@@ -40,6 +45,7 @@ class EmployeeController extends Controller
             'status' => 'required|string|max:50',
         ]);
         Employee::create($request->all());
+
         return redirect()->route('employees.index');
     }
 
@@ -49,6 +55,7 @@ class EmployeeController extends Controller
     public function show(string $id)
     {
         $employee = Employee::find($id);
+
         return view('employees.show', compact('employee'));
     }
 
@@ -58,7 +65,11 @@ class EmployeeController extends Controller
     public function edit(string $id)
     {
         $employee = Employee::find($id);
-        return view('employees.edit', compact('employee'));
+
+        $departments = Department::all();
+        $positions = Position::all();
+
+        return view('employees.edit', compact('employee', 'departments', 'positions'));
     }
 
     /**
@@ -85,6 +96,7 @@ class EmployeeController extends Controller
             'tanggal_masuk',
             'status',
         ]));
+
         return redirect()->route('employees.index');
     }
 
@@ -95,6 +107,7 @@ class EmployeeController extends Controller
     {
         $employee = Employee::find($id);
         $employee->delete();
+
         return redirect()->route('employees.index');
     }
 }

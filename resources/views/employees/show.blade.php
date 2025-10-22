@@ -20,7 +20,7 @@
             <th>Nomor Telepon</th>
             <td>{{ $employee->nomor_telepon }}</td>
         </tr>
-        <tr>
+        <tr>    
             <th>Tanggal Lahir</th>
             <td>{{ $employee->tanggal_lahir }}</td>
         </tr>

@@ -3,6 +3,12 @@
 @section('content')
     <div class="container mt-5">
         <h1 class="mb-4">Daftar Pegawai</h1>
+
+        <a href="{{ route('employees.create') }}"
+            style="background: blue; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;">
+            + Tambah Pegawai Baru
+        </a>
+        <br><br>
         <table border="1" cellpadding="5" cellspacing="0">
             <thead>
                 <tr>

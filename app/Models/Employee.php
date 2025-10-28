@@ -18,7 +18,7 @@ class Employee extends Model
         'alamat',
         'tanggal_masuk',
         'status',
-        'department_id',
+        'departemen_id',
         'jabatan_id'
     ];
 

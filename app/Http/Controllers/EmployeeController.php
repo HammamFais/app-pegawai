@@ -87,15 +87,7 @@ class EmployeeController extends Controller
             'status' => 'required|string|max:50',
         ]);
         $employee = Employee::findOrFail($id);
-        $employee->update($request->only([
-            'nama_lengkap',
-            'email',
-            'nomor_telepon',
-            'tanggal_lahir',
-            'alamat',
-            'tanggal_masuk',
-            'status',
-        ]));
+        $employee->update($request->all());
 
         return redirect()->route('employees.index');
     }

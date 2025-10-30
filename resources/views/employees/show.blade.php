@@ -2,57 +2,86 @@
 @section('title', 'Detail Pegawai')
 
 @section('content')
-    <h1>Detail Pegawai</h1>
-    <table border="1" cellpadding="8" cellspacing="0">
-        <tr>
-            <th>ID</th>
-            <td>{{ $employee->id }}</td>
-        </tr>
-        <tr>
-            <th>Nama Lengkap</th>
-            <td>{{ $employee->nama_lengkap }}</td>
-        </tr>
-        <tr>
-            <th>Email</th>
-            <td>{{ $employee->email }}</td>
-        </tr>
-        <tr>
-            <th>Nomor Telepon</th>
-            <td>{{ $employee->nomor_telepon }}</td>
-        </tr>
-        <tr>
-            <th>Tanggal Lahir</th>
-            <td>{{ $employee->tanggal_lahir }}</td>
-        </tr>
-        <tr>
-            <th>Alamat</th>
-            <td>{{ $employee->alamat }}</td>
-        </tr>
-        <tr>
-            <th>Tanggal Masuk</th>
-            <td>{{ $employee->tanggal_masuk }}</td>
-        </tr>
-        <tr>
-            <th>Departemen</th>
-            <td>{{ $employee->department->nama_departemen ?? 'N/A' }}</td>
-        </tr>
-        <tr>
-            <th>Jabatan</th>
-            <td>{{ $employee->position->nama_jabatan ?? 'N/A' }}</td>
-        </tr>
-        <tr>
-            <th>Status</th>
-            <td>{{ $employee->status }}</td>
-        </tr>
-        <tr>
-            <th>Dibuat Pada</th>
-            <td>{{ $employee->created_at }}</td>
-        </tr>
-        <tr>
-            <th>Diupdate Pada</th>
-            <td>{{ $employee->updated_at }}</td>
-        </tr>
-    </table>
-    <br>
-    <a href="{{ route('employees.index') }}">Kembali ke Daftar</a>
+    <div class="p-4 mt-14">
+        <div class="max-w-2xl mx-auto bg-white dark:bg-gray-800 shadow-md rounded-lg p-6">
+
+            <h1 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
+                Detail Pegawai
+            </h1>
+
+            <div class="flow-root">
+                <dl class="-my-3 divide-y divide-gray-200 dark:divide-gray-700 text-sm">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 py-3 sm:gap-4">
+                        <dt class="font-medium text-gray-900 dark:text-white">ID</dt>
+                        <dd class="text-gray-700 dark:text-gray-300 sm:col-span-2">{{ $employee->id }}</dd>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 py-3 sm:gap-4">
+                        <dt class="font-medium text-gray-900 dark:text-white">Nama Lengkap</dt>
+                        <dd class="text-gray-700 dark:text-gray-300 sm:col-span-2">{{ $employee->nama_lengkap }}</dd>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 py-3 sm:gap-4">
+                        <dt class="font-medium text-gray-900 dark:text-white">Email</dt>
+                        <dd class="text-gray-700 dark:text-gray-300 sm:col-span-2">{{ $employee->email }}</dd>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 py-3 sm:gap-4">
+                        <dt class="font-medium text-gray-900 dark:text-white">Nomor Telepon</dt>
+                        <dd class="text-gray-700 dark:text-gray-300 sm:col-span-2">{{ $employee->nomor_telepon }}</dd>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 py-3 sm:gap-4">
+                        <dt class="font-medium text-gray-900 dark:text-white">Tanggal Lahir</dt>
+                        <dd class="text-gray-700 dark:text-gray-300 sm:col-span-2">{{ $employee->tanggal_lahir }}</dd>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 py-3 sm:gap-4">
+                        <dt class="font-medium text-gray-900 dark:text-white">Alamat</dt>
+                        <dd class="text-gray-700 dark:text-gray-300 sm:col-span-2">{{ $employee->alamat }}</dd>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 py-3 sm:gap-4">
+                        <dt class="font-medium text-gray-900 dark:text-white">Tanggal Masuk</dt>
+                        <dd class="text-gray-700 dark:text-gray-300 sm:col-span-2">{{ $employee->tanggal_masuk }}</dd>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 py-3 sm:gap-4">
+                        <dt class="font-medium text-gray-900 dark:text-white">Departemen</dt>
+                        <dd class="text-gray-700 dark:text-gray-300 sm:col-span-2">
+                            {{ $employee->department->nama_departemen ?? 'N/A' }}</GvG>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 py-3 sm:gap-4">
+                        <dt class="font-medium text-gray-900 dark:text-white">Jabatan</dt>
+                        <dd class="text-gray-700 dark:text-gray-300 sm:col-span-2">
+                            {{ $employee->position->nama_jabatan ?? 'N/A' }}</dd>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 py-3 sm:gap-4">
+                        <dt class="font-medium text-gray-900 dark:text-white">Status</dt>
+                        <dd class="text-gray-700 dark:text-gray-300 sm:col-span-2">{{ $employee->status }}</dd>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 py-3 sm:gap-4">
+                        <dt class="font-medium text-gray-900 dark:text-white">Dibuat Pada</dt>
+                        <dd class="text-gray-700 dark:text-gray-300 sm:col-span-2">{{ $employee->created_at }}</dd>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 py-3 sm:gap-4">
+                        <dt class="font-medium text-gray-900 dark:text-white">Diupdate Pada</dt>
+                        <dd class="text-gray-700 dark:text-gray-300 sm:col-span-2">{{ $employee->updated_at }}</dd>
+                    </div>
+                </dl>
+            </div>
+
+            <div class="mt-6">
+                <a href="{{ route('employees.index') }}"
+                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                    &larr; Kembali ke Daftar
+                </a>
+            </div>
+
+        </div>
+    </div>
 @endsection

@@ -1,41 +1,81 @@
-@extends('master') @section('title', 'Daftar Departemen')
-@section('page-title', 'Daftar Departemen') @section('content') <div class="container mt-5">
+@extends('master')
+@section('title', 'Daftar Departemen')
 
-        <a href="{{ route('departments.create') }}"
-            style="background:blue; color:white; padding: 5px 10px; text-decoration:none; border-radius:5px;">
-            + Tambah Departemen
-        </a>
+@section('content')
+    <div class="p-4 mt-14">
 
-        <br><br>
+        <!-- Header: Judul dan Tombol Tambah -->
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">
+                Daftar Departemen
+            </h1>
+            <a href="{{ route('departments.create') }}"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                + Tambah Departemen
+            </a>
+        </div>
 
-        <table border="1" cellpadding="5" cellspacing="0">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nama Departemen</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($departments as $dept) <tr>
-                        <td>{{ $dept->id }}</td>
-                        <td>{{ $dept->nama_departemen }}</td>
-                        <td>
-                            <a href="{{ route('departments.show', $dept->id) }}">Detail</a> |
-                            <a href="{{ route('departments.edit', $dept->id) }}">Edit</a> |
+        <!-- Notifikasi Sukses (Opsional, tapi konsisten dengan template lain) -->
+        @if (session('success'))
+            <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+                role="alert">
+                {{ session('success') }}
+            </div>
+        @endif
 
-                            <form action="{{ route('departments.destroy', $dept->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" onclick="return confirm('Yakin ingin menghapus?')"
-                                    style="background:red; color:white; border:none; cursor:pointer;">
-                                    Delete
-                                </button>
-                            </form>
-                        </td>
+        <!-- Tabel Data -->
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">ID</th>
+                        <th scope="col" class="px-6 py-3">Nama Departemen</th>
+                        <th scope="col" class="px-6 py-3">Aksi</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @forelse($departments as $dept)
+                        <tr
+                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{ $dept->id }}
+                            </th>
+                            <td class="px-6 py-4">
+                                {{ $dept->nama_departemen }}
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex space-x-3">
+                                    <a href="{{ route('departments.show', $dept->id) }}"
+                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Detail</a>
+                                    <a href="{{ route('departments.edit', $dept->id) }}"
+                                        class="font-medium text-yellow-600 dark:text-yellow-500 hover:underline">Edit</a>
+                                    <form action="{{ route('departments.destroy', $dept->id) }}" method="POST"
+                                        onsubmit="return confirm('Yakin ingin menghapus?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="font-medium text-red-600 dark:text-red-500 hover:underline"
+                                            style="background:none; border:none; padding:0; cursor:pointer;">
+                                            Delete
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <td colspan="3" class="px-6 py-4 text-center text-gray-500 dark:text-gray-400">
+                                Tidak ada data departemen.
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination (jika ada) -->
+        {{-- <div class="mt-6">
+            {{ $departments->links() }}
+        </div> --}}
+
     </div>
 @endsection

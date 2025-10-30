@@ -9,17 +9,17 @@ use Illuminate\Http\Request;
 class AttendanceController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the attendances.
      */
     public function index()
     {
-        $attendances = Attendance::with('employee')->latest()->paginate(10);
+        $attendances = Attendance::with('employee')->orderBy('tanggal', 'desc')->paginate(15);
 
         return view('attendance.index', compact('attendances'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new attendance.
      */
     public function create()
     {
@@ -29,51 +29,62 @@ class AttendanceController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created attendance in storage.
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'karyawan_id' => 'required|exists:employees,id',
             'tanggal' => 'required|date',
             'waktu_masuk' => 'nullable|date_format:H:i',
             'waktu_keluar' => 'nullable|date_format:H:i|after_or_equal:waktu_masuk',
             'status_absensi' => 'required|in:hadir,izin,sakit,alpha',
+        ], [
+            'karyawan_id.required' => 'Pilih karyawan terlebih dahulu.',
+            'karyawan_id.exists' => 'Data karyawan tidak ditemukan.',
+            'tanggal.required' => 'Tanggal wajib diisi.',
+            'status_absensi.required' => 'Pilih status absensi.',
+            'waktu_keluar.after_or_equal' => 'Waktu keluar harus sama atau setelah waktu masuk.',
         ]);
 
-        Attendance::create($request->all());
+        // Normalisasi: kalau status bukan 'hadir', kosongkan waktu
+        if ($validated['status_absensi'] !== 'hadir') {
+            $validated['waktu_masuk'] = null;
+            $validated['waktu_keluar'] = null;
+        }
 
-        return redirect()->route('attendance.index')
+        Attendance::create($validated);
+
+        return redirect()->route('attendances.index')
             ->with('success', 'Data absensi berhasil ditambahkan.');
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified attendance.
      */
-    public function show(string $id)
+    public function show(Attendance $attendance)
     {
-        $attendance = Attendance::with('employee')->findOrFail($id);
+        $attendance->load('employee');
 
         return view('attendance.show', compact('attendance'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified attendance.
      */
-    public function edit(string $id)
+    public function edit(Attendance $attendance)
     {
-        $attendance = Attendance::findOrFail($id);
         $employees = Employee::orderBy('nama_lengkap')->get();
 
         return view('attendance.edit', compact('attendance', 'employees'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified attendance in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Attendance $attendance)
     {
-        $request->validate([
+        $validated = $request->validate([
             'karyawan_id' => 'required|exists:employees,id',
             'tanggal' => 'required|date',
             'waktu_masuk' => 'nullable|date_format:H:i',
@@ -81,22 +92,25 @@ class AttendanceController extends Controller
             'status_absensi' => 'required|in:hadir,izin,sakit,alpha',
         ]);
 
-        $attendance = Attendance::findOrFail($id);
-        $attendance->update($request->all());
+        if ($validated['status_absensi'] !== 'hadir') {
+            $validated['waktu_masuk'] = null;
+            $validated['waktu_keluar'] = null;
+        }
 
-        return redirect()->route('attendance.index')
+        $attendance->update($validated);
+
+        return redirect()->route('attendances.index')
             ->with('success', 'Data absensi berhasil diperbarui.');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified attendance from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Attendance $attendance)
     {
-        $attendance = Attendance::findOrFail($id);
         $attendance->delete();
 
-        return redirect()->route('attendance.index')
+        return redirect()->route('attendances.index')
             ->with('success', 'Data absensi berhasil dihapus.');
     }
 }

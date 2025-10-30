@@ -83,10 +83,10 @@ class PositionController extends Controller
      */
     public function destroy(string $id)
     {
-        $position = Position::find($id); 
-        $position->delete(); 
+        $position = Position::find($id);
+        $position->delete();
 
-        return redirect()->route('positions.index') 
+        return redirect()->route('positions.index')
             ->with('success', 'Position deleted successfully.');
     }
 }

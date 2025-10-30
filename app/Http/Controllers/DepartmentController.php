@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Department;      
-use Illuminate\Http\Request;  
+use App\Models\Department;
+use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
 {
@@ -35,6 +35,7 @@ class DepartmentController extends Controller
         ]);
 
         Department::create($request->all());
+
         return redirect()->route('departments.index')
             ->with('success', 'Department created successfully.');
     }

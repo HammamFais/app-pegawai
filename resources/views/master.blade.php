@@ -5,9 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'App Pegawai')</title>
-    <!-- Memuat Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Memuat Flowbite CSS+JS via CDN untuk komponen interaktif (sidebar, dropdown) -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
 </head>
 
@@ -89,7 +87,7 @@
         class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
         aria-label="Sidebar">
         <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
-            <!-- Menu Navigasi disesuaikan dari master.blade.php lama -->
+            <!-- Menu Navigasi -->
             <ul class="space-y-2 font-medium">
                 <li>
                     <a href="{{ url('/') }}"
@@ -174,13 +172,9 @@
 
     <!-- Konten Utama -->
     <div class="p-4 sm:ml-64">
-        <!-- Konten Halaman (dari file blade lain) akan dimuat di sini -->
-        <!-- mt-14 memberi jarak vertikal untuk navbar atas yang fixed -->
         @yield('content')
     </div>
 
-
-    <!-- Memuat Flowbite JS di akhir body -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 </body>
 

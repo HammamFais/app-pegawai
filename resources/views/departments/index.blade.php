@@ -3,8 +3,6 @@
 
 @section('content')
     <div class="p-4 mt-14">
-
-        <!-- Header: Judul dan Tombol Tambah -->
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">
                 Daftar Departemen
@@ -15,7 +13,6 @@
             </a>
         </div>
 
-        <!-- Notifikasi Sukses (Opsional, tapi konsisten dengan template lain) -->
         @if (session('success'))
             <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
                 role="alert">
@@ -71,11 +68,5 @@
                 </tbody>
             </table>
         </div>
-
-        <!-- Pagination (jika ada) -->
-        {{-- <div class="mt-6">
-            {{ $departments->links() }}
-        </div> --}}
-
     </div>
 @endsection

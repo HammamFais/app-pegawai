@@ -93,7 +93,7 @@
                 const gajiPokok = selectedOption.getAttribute('data-gaji-pokok') || 0;
                 gajiPokokInput.value = parseFloat(gajiPokok).toFixed(2);
             } else {
-                gajiPokokInput.value = '0.00'; // Kosongkan jika "--Pilih Karyawan--"
+                gajiPokokInput.value = '0.00'; 
             }
             calculateTotalGaji(); // Hitung ulang total gaji
         }

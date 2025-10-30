@@ -15,7 +15,6 @@
                 <div class="flex items-center">
                     <div
                         class="flex-shrink-0 p-3 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300">
-                        <!-- Icon Pengguna -->
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -26,7 +25,6 @@
                     <div class="ml-4">
                         <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Total Karyawan</p>
                         <p class="text-2xl font-semibold text-gray-900 dark:text-white">
-                            {{-- Ganti dengan variabel dari controller, misal: $totalEmployees --}}
                             {{ $totalEmployees ?? '0' }}
                         </p>
                     </div>
@@ -38,7 +36,6 @@
                 <div class="flex items-center">
                     <div
                         class="flex-shrink-0 p-3 rounded-full bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-300">
-                        <!-- Icon Gedung -->
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -60,7 +57,6 @@
                 <div class="flex items-center">
                     <div
                         class="flex-shrink-0 p-3 rounded-full bg-yellow-100 dark:bg-yellow-900 text-yellow-600 dark:text-yellow-300">
-                        <!-- Icon Tas Kerja -->
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -82,7 +78,6 @@
                 <div class="flex items-center">
                     <div
                         class="flex-shrink-0 p-3 rounded-full bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-300">
-                        <!-- Icon Ceklis -->
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -116,7 +111,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Loop data karyawan baru (Anda harus mengirimkan var $recentEmployees dari controller) -->
                             @isset($recentEmployees)
                                 @forelse($recentEmployees as $employee)
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -137,7 +131,6 @@
                                     </tr>
                                 @endforelse
                             @else
-                                <!-- Placeholder jika variabel $recentEmployees tidak ada -->
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     <th scope="row"
                                         class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">Ahmad
@@ -162,7 +155,6 @@
             <div class="lg:col-span-1 bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6">
                 <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Daftar Departemen</h2>
                 <ul class="divide-y divide-gray-200 dark:divide-gray-700">
-                    <!-- Loop data departemen (Anda harus mengirimkan var $departmentsList dari controller) -->
                     @isset($departmentsList)
                         @forelse($departmentsList as $dept)
                             <li class="py-3">
@@ -172,7 +164,6 @@
                             <li class="py-3 text-gray-500 dark:text-gray-400">Belum ada departemen.</li>
                         @endforelse
                     @else
-                        <!-- Placeholder jika variabel $departmentsList tidak ada -->
                         <li class="py-3"><span class="text-gray-900 dark:text-white">Teknologi Informasi</span></li>
                         <li class="py-3"><span class="text-gray-900 dark:text-white">Sumber Daya Manusia</span></li>
                         <li class="py-3"><span class="text-gray-900 dark:text-white">Pemasaran</span></li>
